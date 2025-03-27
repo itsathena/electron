@@ -1,0 +1,90 @@
+<!-- index.html: -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; media-src 'self' blob:; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; media-src 'self' blob:; script-src 'self'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <title>Retro MP3 Player</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <!-- <div class="screw screw-1"></div> -->
+      <div class="screw screw-2"></div>
+      <div class="screw screw-3"></div>
+      <div class="screw screw-4"></div>
+
+      <div class="window-controls">
+        <button class="window-button close-button" id="close-btn">×</button>
+        <!-- <button class="window-button minimize-button" id="minimize-btn">
+        </button>
+        <button class="window-button maximize-button" id="maximize-btn">□</button> -->
+      </div>
+
+      <div class="volume-display">VOL: 8</div>
+
+      <h1>Music Player</h1>
+
+      <div class="display-panel">
+        <div id="track-info">
+          <span class="scrolling-text">Select a track to begin...</span>
+        </div>
+        <div id="time-display">00:00 / 00:00</div>
+        <canvas id="visualizer-canvas"></canvas>
+      </div>
+
+      <div class="custom-player">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <audio id="audio-player"></audio>
+      </div>
+
+      <div class="cute-control-box">
+        <div class="playback-controls">
+          <button class="physical-button" id="prev-btn">⏮</button>
+          <button class="physical-button" id="play-pause-btn">▶</button>
+          <button class="physical-button" id="next-btn">⏭</button>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <button class="physical-button" id="select-file-btn">LOAD</button>
+
+        <div class="theme-selector">
+          <select id="color-theme">
+            <option value="retro">Retro</option>
+            <option value="cyberpunk">Cyber</option>
+            <option value="pastel">Pastel</option>
+            <option value="monochrome">Mono</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="slider-container">
+        <label>VOL</label>
+        <input type="range" id="volume-slider" min="0" max="100" value="80" />
+      </div>
+
+      <div class="device-buttons">
+        <div class="power-button"></div>
+        <div class="brand-logo">ATHENZTUNEZ</div>
+        <div class="headphone-jack"></div>
+      </div>
+    </div>
+
+    <script src="../main/renderer.js"></script>
+  </body>
+</html>

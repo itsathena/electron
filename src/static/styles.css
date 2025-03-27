@@ -1,0 +1,439 @@
+/* styles.css */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    font-family: 'VT323', 'Courier New', monospace;
+    color: #726285;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .container {
+    width: 350px;
+    padding: 15px;
+    background-image: 
+      linear-gradient(45deg, #ffe0f0, #ffe8f7), 
+      repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 10px,
+        rgba(255, 219, 243, 0.1) 10px,
+        rgba(255, 219, 243, 0.1) 20px
+      );
+    border-radius: 20px;
+    border: 2px solid #ffb6e6;
+    box-shadow: 0 10px 30px rgba(252, 186, 211, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    -webkit-app-region: drag;
+  }
+  
+  /* Handle on top of MP3 player */
+  /* .container::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    background-color: #ffcef3;
+    border-radius: 10px 10px 0 0;
+    top: -15px;
+    left: calc(50% - 50px);
+    border: 2px solid #ffb6e6;
+    border-bottom: none;
+    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.5);
+  } */
+  
+  /* Window control buttons */
+  .window-controls {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    display: flex;
+    gap: 6px;
+    z-index: 100;
+  }
+  
+  .window-controls::after {
+    content: '★';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 5px;
+    font-size: 12px;
+    color: #e984b1;
+  }
+  
+  .window-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: white;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .close-button { background-color: #ff7c7c; }
+  .close-button:hover { background-color: #ff5252; }
+  
+  .minimize-button {
+    background-color: #ffde7c;
+    font-size: 10px;
+    line-height: 0;
+    padding-bottom: 8px;
+  }
+  
+  .maximize-button {
+    background-color: #7cff8b;
+    font-size: 10px;
+  }
+  
+  .window-button:hover {
+    filter: brightness(1.1);
+  }
+  
+  /* Title */
+  h1 {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #e984b1;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0px #ffffff;
+  }
+  
+  /* Display panel for visualizer and track info */
+  .display-panel {
+    width: 100%;
+    background-color: #d4f7e7;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 12px;
+    box-shadow: inset 0 0 10px rgba(159, 207, 189, 0.8);
+    border: 1px solid #c1e8d6;
+    box-sizing: border-box;
+  }
+  
+  #track-info {
+    font-family: 'LCD', 'VT323', monospace;
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+    color: #83c4b3;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  }
+  
+  .scrolling-text {
+    animation: scroll-text 10s linear infinite;
+    display: inline-block;
+  }
+  
+  @keyframes scroll-text {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  #time-display {
+    font-family: 'LCD', 'Digital-7', monospace;
+    color: #83c4b3;
+    font-size: 20px;
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
+  #visualizer-canvas {
+    width: 100%;
+    height: 80px;
+    background-color: #c3eedd;
+    border-radius: 5px;
+    image-rendering: pixelated;
+  }
+  
+  /* Custom player and progress bar */
+  .custom-player {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 15px;
+    background-color: #f2d1ee;
+    border-radius: 7px;
+    overflow: hidden;
+    position: relative;
+    -webkit-app-region: no-drag;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #c09bd8, #ffb6e6);
+    width: 0%;
+    border-radius: 7px;
+    transition: width 0.1s linear;
+  }
+  
+  /* Hidden audio element */
+  #audio-player {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  
+  /* Cute box for playback controls */
+  .cute-control-box {
+    width: 90%;
+    background: linear-gradient(to bottom, #ffd6f7, #ffcaed);
+    border-radius: 15px;
+    padding: 15px 10px;
+    margin: 10px auto;
+    box-shadow: 0 3px 10px rgba(255, 162, 203, 0.4), 
+                inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    border: 2px solid #ffb4df;
+    position: relative;
+  }
+  
+  .cute-control-box::before, .cute-control-box::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ffd6f7;
+    border: 2px solid #ffb4df;
+    border-radius: 50%;
+    top: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #e984b1;
+  }
+  
+  .cute-control-box::before {
+    content: '♪';
+    left: 15px;
+  }
+  
+  .cute-control-box::after {
+    content: '♫';
+    right: 15px;
+  }
+  
+  /* Playback controls inside cute box */
+  .playback-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* Increase gap for symmetric spacing */
+    width: 100%;
+    margin: 0;
+  }
+  
+  /* Control buttons - Previous and Next */
+  .physical-button {
+    background: linear-gradient(to bottom, #ffc2e6, #ffb2d0);
+    color: #726285;
+    border: 2px solid #ffd6f7;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(235, 158, 188, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    transition: all 0.2s;
+    -webkit-app-region: no-drag;
+  }
+  
+  /* Play/Pause Button */
+  #play-pause-btn {
+    background: linear-gradient(to bottom, #ffc2e6, #ffb2d0);
+    color: #726285;
+    border: 2px solid #ffd6f7;
+    padding: 12px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px; 
+    width: 68px; 
+    height: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(235, 158, 188, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    transition: all 0.2s;
+    -webkit-app-region: no-drag;
+  }
+  
+  #play-pause-btn:active,
+  .physical-button:active {
+    box-shadow: 0 1px 2px rgba(235, 158, 188, 0.3),
+                inset 0 1px 5px rgba(235, 158, 188, 0.5);
+    transform: translateY(2px);
+  }
+  
+  /* Load button */
+  #select-file-btn {
+    background: linear-gradient(to bottom, #c09bd8, #a683c2);
+    width: auto;
+    border-radius: 15px;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+  }
+  
+  #select-file-btn:active {
+    background: linear-gradient(to bottom, #a683c2, #c09bd8);
+  }
+  
+  /* Other controls row */
+  .control-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  /* Volume slider */
+  .slider-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .slider-container label {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #a683c2;
+  }
+  
+  .slider-container input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 5px;
+    background: #f2d1ee;
+    margin: 0 10px;
+    overflow: hidden;
+    -webkit-app-region: no-drag;
+  }
+  
+  .slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #ff9cce;
+    cursor: pointer;
+    box-shadow: -100vw 0 0 100vw #ffb6e6;
+  }
+  
+  /* Theme selector */
+  #color-theme {
+    background-color: #ffddf2;
+    color: #726285;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #ffb6e6;
+    font-family: inherit;
+    -webkit-app-region: no-drag;
+  }
+  
+  /* Device decoration elements */
+  .device-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .power-button {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #ffb1b1;
+    border: 2px solid #ffdfdf;
+    box-shadow: 0 0 5px rgba(255, 219, 219, 0.5);
+  }
+  
+  .headphone-jack {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #e4c2e2;
+    background-color: #ffddf2;
+    position: relative;
+  }
+  
+  .headphone-jack::before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #f8e1f4;
+    border-radius: 50%;
+    top: 5px;
+    left: 5px;
+  }
+  
+  /* Decorative screws */
+  .screw {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(#ffd6f5, #ffbdec);
+    position: absolute;
+  }
+  
+  .screw-1 { top: 10px; left: 10px; }
+  .screw-2 { top: 10px; right: 10px; }
+  .screw-3 { bottom: 10px; left: 10px; }
+  .screw-4 { bottom: 10px; right: 10px; }
+  
+  /* Brand logo */
+  .brand-logo {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 14px;
+    color: #c09bd8;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  /* Volume display */
+  .volume-display {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    background-color: #d4f7e7;
+    border-radius: 5px;
+    padding: 2px 5px;
+    font-size: 12px;
+    color: #83c4b3;
+  }

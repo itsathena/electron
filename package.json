@@ -1,0 +1,15 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adheena Dev",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^35.1.1"
+  }
+}
