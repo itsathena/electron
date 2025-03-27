@@ -2,6 +2,21 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
+try {
+  require('electron-reloader')(module, {
+    // Specify which directories to watch for changes
+    watchRenderer: true,   // Watch renderer process files
+    ignore: [
+      'node_modules/**', 
+      'src/static/assets/**', // Ignore asset files if you have them
+    ]
+  });
+  console.log('Hot reload enabled');
+} catch (err) {
+  console.error('Error setting up hot reload:', err);
+}
+
+
 let mainWindow;
 
 function createWindow() {
@@ -25,6 +40,8 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, '..', 'static', 'index.html'));
 
 }
+
+
 
 app.whenReady().then(() => {
   createWindow();

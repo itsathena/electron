@@ -15,8 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
       rel="stylesheet"
     />
-    <title>Retro MP3 Player</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MP3 Player</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
@@ -47,9 +47,23 @@
       <div class="custom-player">
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill"></div>
+          <div class="progress-heart" id="progress-heart">♥︎</div>
         </div>
 
         <audio id="audio-player"></audio>
+      </div>
+
+      <div class="control-row">
+        <button class="file-button" id="select-file-btn">LOAD</button>
+
+        <div class="theme-selector">
+          <select id="color-theme">
+            <option value="pastel">Pastel</option>
+            <option value="retro">Retro</option>
+            <option value="cyberpunk">Cyber</option>
+            <option value="monochrome">Mono</option>
+          </select>
+        </div>
       </div>
 
       <div class="cute-control-box">
@@ -57,19 +71,6 @@
           <button class="physical-button" id="prev-btn">⏮</button>
           <button class="physical-button" id="play-pause-btn">▶</button>
           <button class="physical-button" id="next-btn">⏭</button>
-        </div>
-      </div>
-
-      <div class="control-row">
-        <button class="physical-button" id="select-file-btn">LOAD</button>
-
-        <div class="theme-selector">
-          <select id="color-theme">
-            <option value="retro">Retro</option>
-            <option value="cyberpunk">Cyber</option>
-            <option value="pastel">Pastel</option>
-            <option value="monochrome">Mono</option>
-          </select>
         </div>
       </div>
 

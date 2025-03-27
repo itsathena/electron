@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Color themes
   const colorThemes = {
+    pastel: ['#ffcccc', '#ccffcc', '#ccccff', '#ffffcc', '#ffccff'],
     retro: ['#ff8800', '#ffaa00', '#ffcc00', '#ffdd00', '#ffee00'],
     cyberpunk: ['#ff00ff', '#00ffff', '#ffff00', '#00ff99', '#ff0066'],
-    pastel: ['#ffcccc', '#ccffcc', '#ccccff', '#ffffcc', '#ffccff'],
     monochrome: ['#ffffff', '#dddddd', '#bbbbbb', '#999999', '#777777']
   };
   
-  let currentTheme = colorThemes.retro;
+  let currentTheme = colorThemes.pastel;
   
   // Handle color theme change
   colorThemeSelect.addEventListener('change', () => {
@@ -83,16 +83,29 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   
   // Update playback progress
-  const updateProgress = () => {
-    if (audioPlayer.duration) {
-      const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-      progressFill.style.width = `${percentage}%`;
-      
-      timeDisplay.textContent = `${formatTime(audioPlayer.currentTime)} / ${formatTime(audioPlayer.duration)}`;
-    } else {
-      timeDisplay.textContent = '00:00 / 00:00';
+const updateProgress = () => {
+  const progressHeart = document.getElementById('progress-heart');
+  
+  if (audioPlayer.duration) {
+    const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+    progressFill.style.width = `${percentage}%`;
+
+    if (percentage > 0) {
+      progressHeart.style.opacity = 1;  // Show heart
     }
-  };
+    
+    // Update heart position to follow the progress
+    const progressBarWidth = document.querySelector('.progress-bar').offsetWidth;
+    const heartPosition = (percentage / 100) * progressBarWidth;
+    progressHeart.style.left = `${heartPosition}px`;
+    
+    timeDisplay.textContent = `${formatTime(audioPlayer.currentTime)} / ${formatTime(audioPlayer.duration)}`;
+  } else {
+    timeDisplay.textContent = '00:00 / 00:00';
+    // Reset heart position when no song is playing
+    progressHeart.style.left = '0px';
+  }
+};
   
   // Update playback progress regularly
   setInterval(updateProgress, 100);

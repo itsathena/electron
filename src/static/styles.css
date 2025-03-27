@@ -177,7 +177,7 @@ html, body {
     height: 15px;
     background-color: #f2d1ee;
     border-radius: 7px;
-    overflow: hidden;
+    overflow: visible;  /* Allow content to overflow for the heart */
     position: relative;
     -webkit-app-region: no-drag;
   }
@@ -185,9 +185,24 @@ html, body {
   .progress-fill {
     height: 100%;
     background: linear-gradient(to right, #c09bd8, #ffb6e6);
-    width: 0%;
-    border-radius: 7px;
+    width: 0%; /* Will be dynamically updated */
+    border-radius: 7px; 
     transition: width 0.1s linear;
+  }
+  
+  .progress-heart {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    transform: translateX(-50%);
+    font-size: 32px;
+    color: rgb(172, 119, 222);
+    transition: left 0.1s linear, opacity 0.3s ease; 
+    opacity: 0;  
+    z-index: 10;
+    pointer-events: none;
   }
   
   /* Hidden audio element */
@@ -211,7 +226,7 @@ html, body {
     position: relative;
   }
   
-  .cute-control-box::before, .cute-control-box::after {
+  /* .cute-control-box::before, .cute-control-box::after {
     content: '';
     position: absolute;
     width: 20px;
@@ -225,9 +240,9 @@ html, body {
     justify-content: center;
     font-size: 12px;
     color: #e984b1;
-  }
+  } */
   
-  .cute-control-box::before {
+  /* .cute-control-box::before {
     content: '♪';
     left: 15px;
   }
@@ -236,7 +251,7 @@ html, body {
     content: '♫';
     right: 15px;
   }
-  
+   */
   /* Playback controls inside cute box */
   .playback-controls {
     display: flex;
@@ -308,12 +323,39 @@ html, body {
     background: linear-gradient(to bottom, #a683c2, #c09bd8);
   }
   
-  /* Other controls row */
+  /* Controls row */
   .control-row {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;   
     width: 100%;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    gap: 10px;  
+  }
+
+  .file-button{
+    background: linear-gradient(to bottom, #ffc2e6, #ffb2d0);
+    color: #726285;
+    border: 2px solid #ffd6f7;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(235, 158, 188, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    transition: all 0.2s;
+    -webkit-app-region: no-drag;
+  }
+
+  .theme-selector {
+    display: flex;
+    align-items: center;    
   }
   
   /* Volume slider */
@@ -335,6 +377,7 @@ html, body {
   .slider-container input[type="range"] {
     flex: 1;
     -webkit-appearance: none;
+    appearance: none;
     height: 10px;
     border-radius: 5px;
     background: #f2d1ee;

@@ -4,12 +4,14 @@
   "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
+     "dev": "electron . --dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adheena Dev",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^35.1.1"
+    "electron": "^35.1.1",
+    "electron-reloader": "^1.2.3"
   }
 }
