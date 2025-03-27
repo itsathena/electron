@@ -1,4 +1,4 @@
-# Pixel Music Visualizer
+# Music Visualizer
 
 A cute music visualizer built with Electron that reacts with pixel animations and colorful bars when you play music.
 
